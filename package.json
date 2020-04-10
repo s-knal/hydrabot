@@ -1,7 +1,7 @@
 {
   "name": "hydrabot",
   "version": "1.0.0",
-  "description": "",
+  "description": "Jarvis 🤖 for your team's GitHub workflow",
   "author": "Soham Parekh <mail@sohamp.dev> (https://sohamp.dev)>",
   "license": "GPL-3.0-only",
   "repository": "https://github.com/AlQaholic007/hydrabot.git",
