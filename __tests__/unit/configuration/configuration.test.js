@@ -155,6 +155,7 @@ describe('with version 2', () => {
         label: 'label regex'
         title: 'title regex'
     `)
+    config.settings = config.settings.hydrabot
     expect(config.settings[0].when).toBeDefined()
     expect(config.settings[0].validate).toBeDefined()
     expect(config.hasErrors()).toBe(false)
@@ -171,6 +172,7 @@ describe('with version 1', () => {
         title: 'title regex'
     `)
 
+    config.settings = config.settings.hydrabot
     let validate = config.settings[0].validate
 
     expect(validate.find(e => e.do === 'approvals').min.count).toBe(5)
@@ -183,6 +185,7 @@ describe('with version 1', () => {
       hydrabot:
         approvals: 1
       `)
+    config.settings = config.settings.hydrabot
     let validate = config.settings[0].validate
     expect(validate.find(e => e.do === 'approvals').min.count).toBe(1)
     expect(validate.find(e => e.do === 'title')).toBeUndefined()
@@ -198,7 +201,7 @@ describe('with version 1', () => {
     `)
 
     Configuration.instanceWithContext(context).then(config => {
-      let validate = config.settings[0].validate
+      let validate = config.settings.hydrabot[0].validate
       expect(validate.find(e => e.do === 'approvals').min.count).toBe(5)
       expect(validate.find(e => e.do === 'title').must_exclude.regex).toBe('title regex')
       expect(validate.find(e => e.do === 'label').must_exclude.regex).toBe('label regex')
@@ -216,6 +219,7 @@ describe('with version 1', () => {
     `)
 
     await Configuration.instanceWithContext(context).then(config => {
+      config.settings = config.settings.hydrabot
       let validate = config.settings[0].validate
       expect(config.settings[0].when).toBe('pull_request.*')
       expect(validate.find(e => e.do === 'title').must_exclude.regex).toBe('title pull regex')
@@ -233,6 +237,7 @@ describe('with version 1', () => {
     `)
 
     await Configuration.instanceWithContext(context).then(config => {
+      config.settings = config.settings.hydrabot
       let validate = config.settings[0].validate
       expect(config.settings[0].when).toBe('issues.*')
       expect(validate.find(e => e.do === 'title').must_exclude.regex).toBe('title issue regex')
@@ -252,6 +257,7 @@ describe('with version 1', () => {
     `)
 
     await Configuration.instanceWithContext(context).then(config => {
+      config.settings = config.settings.hydrabot
       let when = config.settings[2]
       expect(when.validate[0].do).toBe('stale')
       expect(when.validate[0].days).toBe(20)
@@ -267,6 +273,7 @@ describe('with version 1', () => {
     `)
 
     await Configuration.instanceWithContext(context).then(config => {
+      config.settings = config.settings.hydrabot
       let when = config.settings[1]
       expect(when.validate[0].do).toBe('stale')
       expect(when.validate[0].days).toBe(20)
@@ -287,6 +294,7 @@ describe('with version 1', () => {
     `)
 
     await Configuration.instanceWithContext(context).then(config => {
+      config.settings = config.settings.hydrabot
       let issueWhen = config.settings[1]
       let pullWhen = config.settings[4]
 
@@ -341,6 +349,7 @@ describe('with version 1', () => {
           message: 'There has not been any activity in the past month. Is there anything to follow-up?'`
 
     const config = new Configuration(settings)
+    config.settings = config.settings.hydrabot
 
     expect(config.settings.length).toBe(2)
     expect(config.settings[0].fail).toBeDefined()
