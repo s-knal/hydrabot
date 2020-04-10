@@ -10,10 +10,11 @@
     <img src="https://img.shields.io/badge/FREE-INSTALL-purple.svg" alt="Free Install">
   </a>
   <a href="https://circleci.com/gh/AlQaholic007/hydrabot">
-    <img src="https://circleci.com/gh/AlQaholic007/hydrabot.svg?style=shield">
+    <img src="https://circleci.com/gh/AlQaholic007/hydrabot/tree/master.svg?style=svg">
   </a>
+  <br>
   <a href="https://codecov.io/gh/AlQaholic007/hydrabot">
-    <img src="https://codecov.io/gh/AlQaholic007/hydrabot/branch/master/graph/badge.svg">
+    <img src="https://codecov.io/gh/AlQaholic007/hydrabot/branch/master/graphs/commits.svg?token=Y742K8ICNG" />
   </a>
 </p>
 
