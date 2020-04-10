@@ -9,11 +9,14 @@
   <a href="https://github.com/apps/Hydrab0t">
     <img src="https://img.shields.io/badge/FREE-INSTALL-purple.svg" alt="Free Install">
   </a>
-  <a href="https://circleci.com/gh/AlQaholic007/hydrabot">
+  <a href="https://t.me/AlQaholic007">
+    <img src="https://img.shields.io/badge/chat-on--telegram-%2310be9e.svg" alt="Free Install">
+  </a>
+  <a href="https://circleci.com/gh/AlQaholic007/hydrabot.svg?style=svg&circle-token=f699e937558e534c9a92a55a929aab9774cda271">
     <img src="https://circleci.com/gh/AlQaholic007/hydrabot.svg?style=shield">
   </a>
   <a href="https://codecov.io/gh/AlQaholic007/hydrabot">
-    <img src="https://codecov.io/gh/AlQaholic007/hydrabot/branch/master/graph/badge.svg">
+  <img src="https://codecov.io/github/AlQaholic007/hydrabot/branch/master/graph/badge.svg?token=Y742K8ICNG" />
   </a>
 </p>
 
@@ -21,9 +24,14 @@
 
 Some examples of what you can do:
 
-- Ensure pull requests follow conventions and [prevent merging](#pull-requests) when it is not followed.
-- [Notify author of failed guidelines](#issues) when opening an issue.
+- Manage labels via commands.
+- Set reminders via commands.
+- Welcome new contributors to your organization.
+- Automatically create a new branch when an issue is assigned.
+- Enforce [PR  conventions](#pull-requests).
+- Notify of [failed guidelines](#issues) when opening an issue.
 - Schedule [detection for obsolete (stale) issues and pull requests](#staleness) and notify author and collaborators.
+- Weekly project summaries.
 - And [more](#configuration)
 
 ---
@@ -35,7 +43,7 @@ Some examples of what you can do:
 
 # Usage
 
-1. [Install](https://github.com/apps/Hydrab0t) the Hydrab0t GitHub App.
+1. [Install](https://github.com/apps/Hydrab0t) the Hydrab0t GitHub App to your repository.
 2. [Create](#configuration) your play(s). Here are some [examples](#examples).
 3. Commit and push the playbook to your repository at `.github/hydrabot.yml`
 
@@ -50,6 +58,14 @@ Define your plays by creating a playbook as `.github/hydrabot.yml` file in your 
 The configuration, called a `playbook`, consists of any number of `plays`. Plays are created by tying [events](#events) with a set of [validators](#validators) and [actions](#actions) together:
 
 ```yml
+branchName: issue-${issue.number}
+# creates a branch with the specified name format when issue is assigned.
+branches:
+# override the source branch (by default the "default branch" of the repository is used) based on the issue label
+  - label: {{label1}}
+    name: {{source1}}
+  - label: {{label2}}
+    name: {{source2}}
 hydrabot:
   - when: {{event}}, {{event}} # can be one or more
     validate:
@@ -74,7 +90,7 @@ Events are specified using the `when` tag like this:
 - when: pull_request.opened
 ```
 
-Multiple events for a play are declared comma delimited like this:
+Multiple events for a play are declared using a comma delimited like:
 
 ```yml
 - when: pull_request.opened, issues.opened
@@ -86,7 +102,7 @@ Events supported for pull requests are as follows:
 And for issues:
 `issues.opened`, `issues.edited`, `issues.labeled`, `issues.unlabeled`, `issues.milestoned`, `issues.demilestoned`, `issues.assigned`, `issues.unassigned`, `issues.synchronize`
 
->  ☝ **NOTE:** More details about events and their payloads can be found on the [GitHub events page](https://developer.github.com/v3/activity/events).
+>  ☝ **NOTE:** Refer [GitHub events page](https://developer.github.com/v3/activity/events) for more details on payloads.
 
 For convenience, wildcards can be used: `pull_request.*`, `issues.*`, `pull_request_review.*`
 
