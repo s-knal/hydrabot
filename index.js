@@ -1,3 +1,4 @@
+process.env.TZ = 'UTC'
 const { Hydrabot } = require('./lib/hydrabot')
 const logger = require('./lib/logger')
 
