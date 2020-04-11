@@ -14,10 +14,10 @@ hydrabot:
           regex: ^(feat|docs|chore|fix|refactor|test|style|perf)(\(\w+\))?:.+$
           message: Semantic release conventions must be followed.
         # All todo check boxes must be checked.
-      - do: description
-        must_exclude:
-          regex: \[ \]
-          message: There are incomplete TODO task(s) unchecked.
+      # - do: description
+      #   must_exclude:
+      #     regex: \[ \]
+      #     message: There are incomplete TODO task(s) unchecked.
       - do: approvals
         min:
           count: 1
