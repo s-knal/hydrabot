@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="bot.png" alt="Hydrab0t" width="197">
+  <img src="bot.jpeg" alt="Hydrab0t" width="197">
   <br>
   <p>Hydrab0t</p>
 </h1>
