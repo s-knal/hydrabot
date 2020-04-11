@@ -1,6 +1,5 @@
 version: 2
-branchName: issue-'${issue.number}'
-branches:
+branchName: short
 hydrabot:
   - when: pull_request.*, pull_request_review.*
     validate:
