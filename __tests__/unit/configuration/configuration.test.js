@@ -151,9 +151,16 @@ describe('with version 2', () => {
   test('it loads correctly without version', () => {
     let config = new Configuration(`
       hydrabot:
-        approvals: 5
-        label: 'label regex'
-        title: 'title regex'
+        - when: pull_request.*
+          validate:
+          - do: approvals
+            max:
+              count: 5
+          - do: title
+            must_include:
+              regex: 'title regex'
+            must_exclude:
+              regex: 'label regex'
     `)
     config.settings = config.settings.hydrabot
     expect(config.settings[0].when).toBeDefined()
@@ -166,6 +173,7 @@ describe('with version 1', () => {
   // write test to test for bad yml
   test('that constructor loads settings correctly', () => {
     let config = new Configuration(`
+      version: 1
       hydrabot:
         approvals: 5
         label: 'label regex'
@@ -182,6 +190,7 @@ describe('with version 1', () => {
 
   test('that defaults are not injected when user defined configuration exists', () => {
     let config = new Configuration(`
+      version: 1
       hydrabot:
         approvals: 1
       `)
@@ -194,6 +203,7 @@ describe('with version 1', () => {
 
   test('that instanceWithContext returns the right Configuration', async () => {
     let context = createMockGhConfig(`
+      version: 1
       hydrabot:
         approvals: 5
         label: 'label regex'
@@ -212,6 +222,7 @@ describe('with version 1', () => {
 
   test('that instanceWithContext returns the right Configuration (pull_requests)', async () => {
     let context = createMockGhConfig(`
+      version: 1
       hydrabot:
         pull_requests:
           label: 'label pull regex'
@@ -230,6 +241,7 @@ describe('with version 1', () => {
 
   test('that instanceWithContext returns the right Configuration (issues)', async () => {
     let context = createMockGhConfig(`
+      version: 1
       hydrabot:
         issues:
           label: 'label issue regex'
@@ -248,6 +260,7 @@ describe('with version 1', () => {
 
   test('that instanceWithContext loads the configuration for stale correctly when specified for pull_requests and issues separately', async () => {
     let context = createMockGhConfig(`
+      version: 1
       hydrabot:
         pull_requests:
           label: 'label issue regex'
@@ -266,6 +279,7 @@ describe('with version 1', () => {
     })
 
     context = createMockGhConfig(`
+      version: 1
       hydrabot:
         issues:
           stale:
@@ -282,6 +296,7 @@ describe('with version 1', () => {
     })
 
     context = createMockGhConfig(`
+      version: 1
       hydrabot:
         issues:
           stale:
@@ -342,6 +357,7 @@ describe('with version 1', () => {
 
   test('that if pass, fail or error is undefined in v2 config, the config will not break', async () => {
     let settings = `
+    version: 1
     hydrabot:
       issues:
         stale:

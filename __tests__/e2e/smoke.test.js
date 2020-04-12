@@ -19,6 +19,7 @@ describe('smoke tests', () => {
 
   test('that hydrabot run properly for an PR', async () => {
     const config = `
+version: 1
 hydrabot:
   pull_requests:
     title:
