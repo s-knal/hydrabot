@@ -145,7 +145,7 @@ Hydrab0t lets you set reminders to remind you for a particular event in the time
 /remind me to comment on the issue in 30 minutes
 ```
 
-Hydrab0t add's a `reminder` label to the Issue/PR upon receiving this command and reminds you when the specified time has elapsed
+Hydrab0t adds a `reminder` ⏰ label to the **issue** or **pull request** upon receiving this command and reminds you when the specified time has elapsed
 
 Note: _These time intervals are counted based on the UTC time but will still be relevant_
 
