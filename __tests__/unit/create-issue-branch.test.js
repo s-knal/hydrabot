@@ -83,7 +83,7 @@ function nockNonExistingBranch (name) {
     .get(`/repos/AlQaholic007/test/git/refs/heads/${name}`)
     .reply(404)
 }
-function nockComment() {
+function nockComment () {
   nock('https://api.github.com')
   .post('/repos/AlQaholic007/test/issues/1/comments', () => {
     return true
@@ -365,7 +365,7 @@ test('configuration with label field missing', async () => {
     .reply(200)
 
   await probot.receive({ name: 'issues', payload: issueAssignedWithBugAndEnhancementLabelsPayload() })
-  expect(issueTitle).toBe('Error in Create Issue Branch app configuration')
+  expect(issueTitle).toBe('Error in create new issue branch configuration')
 })
 
 test('configuration with invalid YAML', async () => {
@@ -392,7 +392,7 @@ test('configuration with invalid YAML', async () => {
   .reply(200)
 
   await probot.receive({ name: 'issues', payload: issueAssignedWithBugAndEnhancementLabelsPayload() })
-  expect(issueTitle).toBe('Error in branch configuration')
+  expect(issueTitle).toBe('Error in create new issue branch configuration')
 })
 
 test('get full branch name from issue title', () => {
@@ -466,25 +466,25 @@ test('it get issue branch prefix for issue that has no branch configuration', ()
 
 test('it to interpolate string with object field expression', () => {
   const o = { hello: 'world' }
-  const result = utils.interpolate('hello ${hello}', o)
+  const result = utils.interpolate(`hello \${hello}`, o)
   expect(result).toBe('hello world')
 })
 
 test('it to interpolate string with nested object field expression', () => {
   const o = { outer: { inner: 'world' } }
-  const result = utils.interpolate('hello ${outer.inner}', o)
+  const result = utils.interpolate(`hello \${outer.inner}`, o)
   expect(result).toBe('hello world')
 })
 
 test('it to interpolate string with undefined object field expression', () => {
   const o = { outer: { inner: 'world' } }
-  const result = utils.interpolate('hello ${inner.outer}', o)
+  const result = utils.interpolate(`hello \${inner.outer}`, o)
   expect(result).toBe('hello undefined')
 })
 
 test('it to interpolate string with issue assigned payload', () => {
   // eslint-disable-next-line no-template-curly-in-string
-  const result = utils.interpolate('Creator ${issue.user.login}, repo: ${repository.name}', issueAssignedPayload)
+  const result = utils.interpolate(`Creator \${issue.user.login}, repo: \${repository.name}`, issueAssignedPayload)
   expect(result).toBe('Creator AlQaholic007, repo: test')
 })
 
@@ -506,7 +506,7 @@ test('that it creates branch with custom issue name', async () => {
   nockNonExistingBranch('foo-1-Test_issue')
   nockExistingBranch('master', 12345678)
   nockComment()
-  nockConfig('branchName: \'foo-${issue.number}-${issue.title}\'')
+  nockConfig(`branchName: 'foo-\${issue.number}-\${issue.title}'`)
   let createEndpointCalled = false
   let branchRef = ''
 
@@ -551,7 +551,7 @@ test('create branch with GitLab-like issue name', async () => {
   nockNonExistingBranch('1-Test_issue')
   nockExistingBranch('master', 12345678)
   nockComment()
-  nockConfig('branchName: \'${issue.number}-${issue.title}\'')
+  nockConfig(`branchName: '\${issue.number}-\${issue.title}'`)
   let createEndpointCalled = false
   let branchRef = ''
 
@@ -579,4 +579,3 @@ test('wildcard matching', () => {
   expect(utils.wildcardMatch('noot', 'aapnoot')).toBeFalsy()
   expect(utils.wildcardMatch('aap', 'Aap')).toBeFalsy()
 })
-
