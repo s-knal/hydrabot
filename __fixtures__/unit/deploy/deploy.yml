@@ -1,0 +1,13 @@
+version: 2
+deploy: 
+  labels: 
+    Deploy%20Staging:
+      environment: staging
+    deploy-test:
+      environment: test
+      description: test environment
+      transient_environment: true
+      auto_merge: false
+      payload:
+        port: 8080
+        https: true
