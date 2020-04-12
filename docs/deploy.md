@@ -2,8 +2,6 @@
 
 If you would like to run your own instance of this plugin, you can do so by forking this repo and deploying it to your own servers or run it locally.
 
-The [Probot deployment guide](https://probot.github.io/docs/deployment/) describes this as well.
-
 [Create a GitHub App](https://github.com/settings/apps/new) and configure the permissions & events with the following:
 
 **Settings:**
@@ -13,21 +11,24 @@ The [Probot deployment guide](https://probot.github.io/docs/deployment/) describ
 
 **Permissions:**
 - Checks - **Read & Write**
+- Contents - **Read & Write**
+- Deployments - **Read & Write**
 - Issues - **Read & Write**
-- Repository metadata - **Read Only**
-- Pull requests - **Read Only**
+- Metadata - **Read Only**
+- Pull requests - **Read & Write**
 - Commit Statuses - **Read & Write**
+- Projects - **Read-Only**
 - Single File - **Read-only**
   - Path: `.github/hydrabot.yml`
-- Repository Contents - **Read-Only**
-- Repository projects - **Read-Only**
-- Deployments - **Read & Write**
 
 **And subscription to the following events:**
+- [x] Issues
+- [x] Issue comment
+- [x] Label
 - [x] Pull request
 - [x] Pull request review comment
 - [x] Pull request review
-- [x] Issues
+
 
 Make sure to create a private key for the app after it's been registered.
 
