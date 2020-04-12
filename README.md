@@ -29,6 +29,7 @@ Some examples of what you can do:
 - [Manage labels](#commands).
 - [Set reminders](#commands).
 - Automatically [create a new branch when an issue is assigned](docs/create-issue-branch.md).
+- Trigger [deployments](docs/deployment.md) with labels.
 - Enforce [PR  conventions](docs/validators.md#pull-requests).
 - Notify of [failed guidelines](docs/#issues) when opening an issue.
 - Schedule [detection for obsolete (stale) issues and pull requests](#docs/staleness) and notify author and collaborators.
