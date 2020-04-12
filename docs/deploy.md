@@ -21,6 +21,7 @@ The [Probot deployment guide](https://probot.github.io/docs/deployment/) describ
   - Path: `.github/hydrabot.yml`
 - Repository Contents - **Read-Only**
 - Repository projects - **Read-Only**
+- Deployments - **Read & Write**
 
 **And subscription to the following events:**
 - [x] Pull request
