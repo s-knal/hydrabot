@@ -12,7 +12,7 @@
   <a href="https://t.me/AlQaholic007">
     <img src="https://img.shields.io/badge/chat-on--telegram-%2310be9e.svg" alt="Free Install">
   </a>
-    <img alt="CircleCI" src="https://img.shields.io/circleci/build/gh/AlQaholic007/hydrabot/master?color=green&label=circleci&logo=circleci">
+  <img alt="CircleCI" src="https://img.shields.io/circleci/build/gh/AlQaholic007/hydrabot/master?color=green&label=circleci&logo=circleci">
   <a href="https://codecov.io/gh/AlQaholic007/hydrabot">
   <img src="https://codecov.io/github/AlQaholic007/hydrabot/branch/master/graph/badge.svg?token=Y742K8ICNG" />
   </a>
