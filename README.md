@@ -46,7 +46,7 @@ Some examples of what you can do:
 # Usage
 
 1. [Install](https://github.com/apps/Hydrab0t) the Hydrab0t GitHub App to your repository.
-2. [Create](#configuration) your play(s). Here are some [examples](#examples).
+2. [Create](#configuration) your play(s) in a playbook.
 3. Commit and push the playbook to your repository at `.github/hydrabot.yml`
 
 > ☝ **NOTE:** You can also [deploy to your own server](docs/deploy.md).
@@ -59,6 +59,54 @@ Define your plays by creating a playbook as `.github/hydrabot.yml` file in your 
 ## Basics
 The configuration, called a `playbook`, consists of any number of `plays`.
 
+```yml
+##
+# automatically create branches when issues are assigned
+##
+branchName: # convention to name new branches when issues are assigned
+branches:
+  - label: {{label}} # you can have issues with certain label clone from different source branch
+    name: {{source branch}} # name of the source branch, default is "default" branch of repository
+    prefix: {{valid prefix}} # prefix for newly created branch
+##
+# automatically close issues that have lacking information from author
+##
+needsInfo:
+  needsInfoLabel: {{label}} # issues needing information have this label
+  closeComment: # closing comment to close the issue
+  daysUntilClose: # days to wait before closing the issue
+##
+# automatically perform validations on issues and pull requests 
+##
+hydrabot:
+  - when: {{event}}, {{event}} # can be one or more
+    validate:
+      # list of validators. Specify one or more.
+      - do: {{validator}}
+        {{option}}: # name of an option supported by the validator.
+          {{sub-option}}: {{value}} # an option will have one or more sub-options.
+    pass: # list of actions to be executed if all validation passes. Specify one or more. Omit this tag if no actions are needed.
+      - do: {{action}}
+    fail: # list of actions to be executed when at least one validation fails. Specify one or more. Omit this tag if no actions are needed.
+      - do: {{action}}
+    error: # list of actions to be executed when at least one validator throws an error. Specify one or more. Omit this tag if no actions are needed.
+      - do: {{action}}
+##
+# automatically deploy when labels are assigned
+##
+deploy:
+  {{label}}:
+    environment: # deploy to which github environment
+    description: # description for the environment
+    transient_environment:
+    auto_merge: # deploy even when merge conflict with default branch
+    required_contexts:
+      - {{context}} # required checks before deploying
+    payload:
+      port:
+      https:
+```
+
 ### Create issue branch plays
 
 ```yml
@@ -69,7 +117,7 @@ branches:
     prefix: feature/
 ```
 
-Read more on [create issue branch configuration](docs/create-issue-branch)
+Read more on [create issue branch configuration](docs/create-issue-branch.md)
 
 ### Deployment plays
 

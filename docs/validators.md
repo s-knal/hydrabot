@@ -581,7 +581,7 @@ Validate pull requests for mergeability based on content and structure of your P
 </details> -->
 <br>
 
-Read the [configuration options](#configuration) for more options.
+Read the [configuration options](../README#configuration) for more options.
 
 ### Issues
 Automatically create a comment when a new issue is `openened` to remind the author when the title does not follow conventions or is missing a label.
